@@ -1,0 +1,27 @@
+.header-container {
+  // border: 1px solid hotpink;
+  background-color: $header-bg;
+  box-shadow: $shadow;
+  .logo-container {
+    padding: 7px;
+    display: flex;
+    width: 60px;
+    height: 100%;
+    box-shadow: inset $shadow-subtle;
+    text-align: center;
+    background-color: $hot;
+
+    &:hover img {
+      transform: rotateY(180deg);
+    }
+  }
+  img {
+    flex: 1 0 auto;
+    width: 40px;
+    filter: brightness(0) invert(1);
+    transition: all 0.5s;
+  }
+  h1 {
+    padding-left: $sp;
+  }
+}

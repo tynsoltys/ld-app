@@ -1,16 +1,49 @@
 import React, { Component } from 'react';
-import Logo from './ld-logo-square-128.png';
+import MessageContext from './contexts/MessageContext';
 import './App.scss';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Nav from './components/Nav';
+import ArticlesListing from './components/ArticlesListing';
+import Content from './components/Content';
 const axios = require('axios');
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { msg: '', latest: '', msgs: [] };
+    //* Definitions:
+    // Msg is the POST request, latest is the latest POST response, msgs is an array of all messages (future use perhaps)
+    this.state = {
+      msg: '',
+      latest: '',
+      msgs: [],
+      navItems: [
+        {
+          url: '/one',
+          icon: '/path'
+        },
+        {
+          url: '/one',
+          icon: '/path'
+        },
+        {
+          url: '/one',
+          icon: '/path'
+        },
+        {
+          url: '/one',
+          icon: '/path'
+        }
+      ],
+      articles: [],
+      activeArticle: 3
+    };
+    // Binding Form Event Handlers to this
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // Checking to see if we're up and running
   componentDidMount() {
     console.log(`🏇 App`);
   }
@@ -25,181 +58,73 @@ class App extends Component {
   }
 
   handleSubmit(event) {
-    // alert('A message has been posted: ' + this.state.msg);
     event.preventDefault();
-    console.log(this.state.msg);
+    // POST request
     axios
       .post('http://localhost:9000/', {
         msg: this.state.msg
       })
       .then((res) => {
-        this.setState({ msgs: res.data, latest: this.state.msg });
+        //TODO: create new route/view for msgs
+        console.log(res.data);
+        this.setState({ msgs: res.data[1], latest: res.data[0] });
       })
       .catch((error) => {
-        console.log(`oopzsh`);
+        console.log(error);
       });
+
+    //Article Generator (just for purposes of this thing)
+    const articleTitle = 'Lorem Ipsum';
+    const articleContent =
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo dtempor incididunt veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip export.';
+    const arrayGenerator = (num) => {
+      let articlesArray = [];
+      console.log(`generator ON`);
+      while (num > 0) {
+        articlesArray.push({
+          id: num,
+          title: articleTitle,
+          content: articleContent
+        });
+        console.log(`hi`);
+        return num - 1;
+      }
+    };
+    arrayGenerator(9);
   }
 
   render() {
     return (
-      <div className='app-container'>
-        {/* {this.state.apiResponse} */}
-        <header className='header-container'>
-          <div className='logo-container'>
-            <img src={Logo} alt='log dna helix logo' />
-          </div>
-          <h1>What is Lorem Ipsum? {this.state.apiResponse} </h1>
-        </header>
-        <main className='main-container'>
-          <nav className='nav-container'>
-            <ul>
-              <li>
-                <div className='workspace-img'></div>
-                <p>⌘ 1</p>
-              </li>
-              <li>
-                <div className='workspace-img'></div>
-                <p>⌘ 2</p>
-              </li>
-              <li>
-                <div className='workspace-img'></div>
-                <p>⌘ 3</p>
-              </li>
-              <li>
-                <div className='workspace-img'></div>
-                <p>⌘ 4</p>
-              </li>
-            </ul>
-          </nav>
-          <aside className='articles-list-container'>
-            <ul>
-              <li>
-                <article>
-                  <h2>Lorem Ipsum</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex...
-                  </p>
-                </article>
-                <article>
-                  <h2>Lorem Ipsum</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex...
-                  </p>
-                </article>
-                <article>
-                  <h2>Lorem Ipsum</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex...
-                  </p>
-                </article>
-                <article>
-                  <h2>Lorem Ipsum</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex...
-                  </p>
-                </article>
-                <article>
-                  <h2>Lorem Ipsum</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex...
-                  </p>
-                </article>
-                <article>
-                  <h2>Lorem Ipsum</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex...
-                  </p>
-                </article>
-                <article>
-                  <h2>Lorem Ipsum</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex...
-                  </p>
-                </article>
-                <article>
-                  <h2>Lorem Ipsum</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex...
-                  </p>
-                </article>
-                <article>
-                  <h2>Lorem Ipsum</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex...
-                  </p>
-                </article>
-              </li>
-            </ul>
-          </aside>
-          <div className='content-container'>
-            <article>
-              <h2>Aenean commodo ligula eget dolor.</h2>
-              <h3>Nullam dictum felis eu pede mollis pretium.</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit
-                nulla nisi rem aspernatur quas doloribus cum veritatis debitis
-                voluptate, nihil, adipisci quisquam. Eligendi maxime libero
-                facere consequuntur fugiat, harum dignissimos. Voluptatem
-                dolorum vero, rem asperiores praesentium ipsa quidem? Vero,
-                labore dignissimos at neque ratione exercitationem eius nisi
-                culpa dolor delectus ad non est illum nobis suscipit sapiente
-                tenetur beatae? Repellendus? Ab reiciendis eligendi ducimus
-                explicabo? Error voluptatibus officiis repellendus sed delectus
-                et animi perspiciatis molestiae ab? Magni animi alias voluptatum
-                saepe, eaque tempora sed doloribus voluptatem, delectus natus
-                sint non?
-              </p>
-              <section className='article-image'>
-                <div className='image'></div>
-                <figcaption className='article-caption'>
-                  Eligendi maxime libero facere.
-                </figcaption>
-              </section>
-            </article>
-            <footer className='message-container'>
-              <form onSubmit={this.handleSubmit}>
-                <input
-                  type='text'
-                  placeholder='Message...'
-                  name='msg'
-                  onChange={this.handleInputChange}
-                />
-                <button type='submit'>Submit</button>
-              </form>
-              <div className='notification error'>
-                <p>MESSGE: {this.state.latest}</p>
-              </div>
-            </footer>
-          </div>
-        </main>
-      </div>
+      <MessageContext.Provider value={this.state}>
+        <div className='app-container'>
+          <Header />
+          <main className='main-container'>
+            <Nav items={this.state.navItems} />
+            <ArticlesListing
+              articles={this.state.articles}
+              activeArticle={this.state.activeArticle}
+            />
+            <div className='content-container'>
+              <Content />
+              <Footer />
+              <footer className='message-container'>
+                <form onSubmit={this.handleSubmit}>
+                  <input
+                    type='text'
+                    placeholder='Message...'
+                    name='msg'
+                    onChange={this.handleInputChange}
+                  />
+                  <button type='submit'>Submit</button>
+                </form>
+                <div className='notification error'>
+                  <p>MESSGE: {this.state.latest}</p>
+                </div>
+              </footer>
+            </div>
+          </main>
+        </div>
+      </MessageContext.Provider>
     );
   }
 }

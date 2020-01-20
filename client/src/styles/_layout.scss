@@ -15,37 +15,20 @@ ul {
 }
 
 .header-container {
-  // border: 1px solid hotpink;
   width: 100%;
   height: 60px;
-  background-color: $header-bg;
-  box-shadow: $shadow;
   position: fixed;
   z-index: 10000;
   top: 0;
   display: flex;
   align-items: center;
-  .logo-container {
-    padding: 7px;
-    display: flex;
-    width: 60px;
-    height: 100%;
-    box-shadow: inset $shadow-subtle;
-    text-align: center;
-  }
-  img {
-    flex: 1 0 auto;
-    width: 40px;
-  }
-  h1 {
-    padding-left: $sp;
-  }
 }
 
 .main-container {
   // border: 1px solid green;
   position: relative;
   display: flex;
+  min-height: calc(100vh - 60px);
 }
 
 .nav-container {

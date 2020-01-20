@@ -2,15 +2,17 @@ form {
   transition: all 0.3s;
   &:hover {
     input {
-      border: 2px solid $hot;
-      outline: none;
+      border-color: $hot;
     }
     button {
-      border: 2px solid $hot;
-      outline: none;
-      background: $hot;
-      color: #fff;
+      border-color: $hot;
+      background-color: $hot;
+      color: white;
     }
+  }
+  &:focus {
+  }
+  &:active {
   }
 }
 
@@ -19,32 +21,23 @@ input {
   border: 1px solid $gray-35;
   width: calc(100% - 60px);
   border-radius: 3px;
-  &:focus {
-    padding: 7px 10px;
-    border: 2px solid $hot;
-    outline: none;
-  }
+  background-color: #fff;
+  &:focus,
   &:active {
-    padding: 7px 10px;
-    border: 2px solid $hot;
+    padding: 7px 9px;
     outline: none;
+    border: 2px solid $hot;
+    background-color: rgba($hot, 0.05);
   }
 }
 button {
-  padding: 7px 15px;
+  padding: 7px 10px;
+  font-weight: bold;
+  color: $accent-dark;
   border-radius: 2px;
   margin-left: -22px;
   border: 2px solid $gray-40;
   &:focus {
-    border: 2px solid $hot;
     outline: none;
-    background: $hot;
-    color: #fff;
-  }
-  &:active {
-    border: 2px solid $hot;
-    outline: none;
-    background: $hot;
-    color: #fff;
   }
 }

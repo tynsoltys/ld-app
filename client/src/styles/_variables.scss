@@ -1,0 +1,54 @@
+$font-stack: 'Helvetica', Roboto, Arial, sans-serif;
+
+// Colors
+
+// Shades
+$hot: #dd245c;
+$gray-10: #f6f6f6;
+$gray-15: #f1f1f2;
+$gray-17: #f0f0f1;
+$gray-20: #efefef;
+$gray-30: #dfdfe0;
+$gray-35: #bfc1c3;
+$gray-40: #aaa;
+$gray-50: #333;
+$gray-60: #040404;
+
+$shadow-20: rgba(0, 0, 0, 0.2);
+$shadow-40: rgba(0, 0, 0, 0.4);
+
+// Theme
+$main-text: $gray-60;
+$content-bg: $gray-10;
+$header-bg: $gray-20;
+$aside-bg: $gray-15;
+$accent-light: $gray-17;
+$accent-mid: $gray-40;
+$accent-dark: $gray-50;
+$secondary: $gray-30;
+$border: 1px solid $secondary;
+
+// Spacing
+$sp: 10px;
+
+// Breakpoints
+
+// Other
+$shadow: rgba(0, 0, 0, 0.4) 0 0 5px;
+$shadow-subtle: rgba(0, 0, 0, 0.2) 0 0 2px;
+$shadow-subtle-right: 15px 0px 10px -15px rgba(0, 0, 0, 0.2);
+
+// // Theme:
+// :root {
+//   --shadow: rgba(0, 0, 0, 0.4) 0 0 5px;
+//   --main-text: $gray-60;
+//   --content-bg: $gray-10;
+//   --aside-bg: $gray-30
+//   --accent: $gray-50;
+//   --secondary: #dfdfe0;
+//   --border: 1px solid #dfdfe0;
+// }
+
+:root {
+  --radius: 4px;
+}

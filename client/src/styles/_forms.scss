@@ -1,0 +1,50 @@
+form {
+  transition: all 0.3s;
+  &:hover {
+    input {
+      border: 2px solid $hot;
+      outline: none;
+    }
+    button {
+      border: 2px solid $hot;
+      outline: none;
+      background: $hot;
+      color: #fff;
+    }
+  }
+}
+
+input {
+  padding: 8px 10px;
+  border: 1px solid $gray-35;
+  width: calc(100% - 60px);
+  border-radius: 3px;
+  &:focus {
+    padding: 7px 10px;
+    border: 2px solid $hot;
+    outline: none;
+  }
+  &:active {
+    padding: 7px 10px;
+    border: 2px solid $hot;
+    outline: none;
+  }
+}
+button {
+  padding: 7px 15px;
+  border-radius: 2px;
+  margin-left: -22px;
+  border: 2px solid $gray-40;
+  &:focus {
+    border: 2px solid $hot;
+    outline: none;
+    background: $hot;
+    color: #fff;
+  }
+  &:active {
+    border: 2px solid $hot;
+    outline: none;
+    background: $hot;
+    color: #fff;
+  }
+}

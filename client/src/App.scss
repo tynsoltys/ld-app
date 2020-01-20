@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
+@import './styles/variables';
+@import './styles/layout';
+@import './styles/typography';
+@import './styles/forms';
+
+@import './styles/sections/header';
+@import './styles/sections/nav';
+@import './styles/sections/articles-list';
+@import './styles/sections/content';
+@import './styles/sections/footer';

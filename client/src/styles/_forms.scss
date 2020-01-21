@@ -1,3 +1,9 @@
+@mixin hot-button {
+  border-color: $hot;
+  background-color: $hot;
+  color: white;
+}
+
 form {
   transition: all 0.3s;
   &:hover {
@@ -5,14 +11,8 @@ form {
       border-color: $hot;
     }
     button {
-      border-color: $hot;
-      background-color: $hot;
-      color: white;
+      @include hot-button;
     }
-  }
-  &:focus {
-  }
-  &:active {
   }
 }
 
@@ -22,6 +22,12 @@ input {
   width: calc(100% - 60px);
   border-radius: 3px;
   background-color: #fff;
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    box-shadow: 0 0 0 30px $hot-light inset !important;
+  }
   &:focus,
   &:active {
     padding: 7px 9px;
@@ -39,5 +45,10 @@ button {
   border: 2px solid $gray-40;
   &:focus {
     outline: none;
+  }
+  &.loading {
+    @include hot-button;
+    border: none;
+    height: 31px;
   }
 }

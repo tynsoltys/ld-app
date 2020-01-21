@@ -1,10 +1,13 @@
 import React from 'react';
 
-const ArticleListItem = (props) => {
+const ArticleListItem = ({ article, activeArticle }) => {
   return (
-    <article key={props.id}>
-      <h2>{props.title}</h2>
-      <p>{props.content}</p>
+    <article
+      key={`article${article.id}`}
+      id={article.id}
+      className={activeArticle === article.id ? `activeArticle` : undefined}>
+      <h2>{article.title}</h2>
+      <p>{article.content}</p>
     </article>
   );
 };

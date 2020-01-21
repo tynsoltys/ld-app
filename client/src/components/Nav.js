@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 const Nav = (props) => {
-  // This is actually probably a fine time to use props but just wanted to play around with some hooks.
-  const [navItems] = useState(props.items);
-  console.log(navItems);
-
-  useEffect(
-    () => {} //console.log(`There are ${navItems.length} items in the nav.`)
-  );
-
+  const navItems = props.items;
   const renderNavItems = () =>
     navItems.map((item, i) => {
       return (
-        <li>
+        <li key={`workspace` + i + 1}>
           <div className='workspace-img' href={item.url} src={item.icon}></div>
           <p>⌘ {i + 1}</p>
         </li>
@@ -20,7 +13,7 @@ const Nav = (props) => {
     });
 
   return (
-    <nav className='nav-container'>
+    <nav role='navigation' aria-label='workspaces' className='nav-container'>
       <ul>{renderNavItems()}</ul>
     </nav>
   );

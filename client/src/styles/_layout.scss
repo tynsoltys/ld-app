@@ -1,5 +1,8 @@
 body {
   padding-top: 60px;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ul {
@@ -20,39 +23,15 @@ ul {
   position: fixed;
   z-index: 10000;
   top: 0;
-  display: flex;
-  align-items: center;
 }
 
 .main-container {
-  // border: 1px solid green;
-  position: relative;
-  display: flex;
   min-height: calc(100vh - 60px);
 }
 
 .nav-container {
-  padding-top: $sp;
   flex: 1 0 60px;
-  background-color: $accent-dark;
   width: 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  .workspace-img {
-    width: 40px;
-    height: 40px;
-    background-color: $accent-light;
-    border-radius: 4px;
-    margin-bottom: 5px;
-  }
-  p {
-    color: $accent-light;
-    font-size: 0.7rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
-  }
 }
 
 .articles-list-container {

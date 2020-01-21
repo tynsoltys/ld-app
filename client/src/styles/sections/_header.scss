@@ -1,5 +1,6 @@
 .header-container {
-  // border: 1px solid hotpink;
+  display: flex;
+  align-items: center;
   background-color: $header-bg;
   box-shadow: $shadow;
   .logo-container {
@@ -10,9 +11,9 @@
     box-shadow: inset $shadow-subtle;
     text-align: center;
     background-color: $hot;
-
     &:hover img {
       transform: rotateY(180deg);
+      cursor: pointer;
     }
   }
   img {

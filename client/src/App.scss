@@ -7,8 +7,10 @@
 @import './styles/typography';
 @import './styles/forms';
 
+// All sections correspond to components (list items contained in list stylesheets) and include internal layouts
 @import './styles/sections/header';
 @import './styles/sections/nav';
 @import './styles/sections/articles-list';
+@import './styles/sections/main';
 @import './styles/sections/content';
 @import './styles/sections/footer';

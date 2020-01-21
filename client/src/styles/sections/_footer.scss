@@ -16,7 +16,7 @@ footer {
 }
 
 .notification {
-  background-color: $gray-20;
+  background-color: #ffffff;
   border-radius: var(--radius);
   border: 1px solid $hot;
   padding: 10px 15px;
@@ -27,6 +27,7 @@ footer {
   display: flex;
   justify-content: space-between;
   transition: all 0.5s;
+  box-shadow: $shadow-subtle;
   p {
     margin: 0;
     display: inline-block;

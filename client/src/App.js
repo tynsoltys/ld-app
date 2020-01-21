@@ -7,6 +7,7 @@ import Main from './components/Main';
 import Nav from './components/Nav';
 import ArticlesListing from './components/ArticlesListing';
 import Content from './components/Content';
+import { workspaceGenerator } from './utils/utils';
 const axios = require('axios');
 
 class App extends Component {
@@ -17,27 +18,8 @@ class App extends Component {
     this.state = {
       msg: '',
       latest: '',
-      msgs: [],
-      navItems: [
-        {
-          url: '/one',
-          icon: '/path'
-        },
-        {
-          url: '/one',
-          icon: '/path'
-        },
-        {
-          url: '/one',
-          icon: '/path'
-        },
-        {
-          url: '/one',
-          icon: '/path'
-        }
-      ],
-      articles: [],
-      activeArticle: 3,
+      navItems: [],
+      loading: false,
       notificationShow: false
     };
     // Binding Form Event Handlers to this
@@ -48,7 +30,10 @@ class App extends Component {
 
   // Checking to see if we're up and running
   componentDidMount() {
-    console.log(`🏇 App`);
+    console.log(`🏇 App is running`);
+    // Do some kind of calls maybe
+    const navItems = workspaceGenerator(4);
+    this.setState({ navItems });
   }
 
   handleInputChange(event) {
@@ -64,29 +49,38 @@ class App extends Component {
     event.preventDefault();
     // POST request
     axios
-      .post('http://localhost:9000/', {
-        msg: this.state.msg
-      })
+      .post(
+        'http://localhost:9000/',
+        {
+          msg: this.state.msg
+        },
+        this.setState({
+          loading: true
+        })
+      )
       .then((res) => {
         //TODO: create new route/view for msgs
         console.log(res.data);
         this.setState({
           msg: '',
-          msgs: res.data[1],
           latest: res.data[0],
-          notificationShow: true
+          notificationShow: true,
+          loading: false
         });
       })
       .catch((error) => {
         console.log('hi' + error);
         alert(
-          `🙅  ${error} \nWe're sorry, your message could not be sent at this time.`
+          `🙅 ${error} \nWe're sorry, your message could not be sent at this time.`
         );
-        //TODO refactor notificaiton to handle errors as well
+        this.setState({
+          loading: false
+        });
+        //TODO refactor notification to handle errors as well
       });
   }
 
-  closeNotification = (e) => {
+  closeNotification = () => {
     console.log('close');
     this.setState({
       notificationShow: false
@@ -94,26 +88,31 @@ class App extends Component {
   };
 
   render() {
+    const { navItems, notificationShow, msg, latest, loading } = this.state;
+
     return (
       <MessageContext.Provider value={this.state}>
         <div className='app-container'>
           <Header />
           <Main>
-            <Nav items={this.state.navItems} />
-            <ArticlesListing
-              articles={this.state.articles}
-              activeArticle={this.state.activeArticle}
-            />
+            <Nav items={navItems} />
+            <ArticlesListing />
             <div className='content-container'>
               <Content />
               <footer className='message-container'>
                 <div
                   onClick={this.closeNotification}
                   className={`notification ${
-                    this.state.notificationShow ? `opening` : `closing`
+                    notificationShow ? `opening` : `closing`
                   }`}>
                   <p>
-                    <strong>✔️ Successfully sent</strong> "{this.state.latest}".
+                    <strong>
+                      <span role='img' aria-label='check'>
+                        ✔️
+                      </span>{' '}
+                      Successfully sent
+                    </strong>{' '}
+                    "{latest}".
                     <strong></strong>
                   </p>
                   <p className='close'>✕</p>
@@ -124,9 +123,13 @@ class App extends Component {
                     placeholder='Message...'
                     name='msg'
                     onChange={this.handleInputChange}
-                    value={this.state.msg}
+                    value={msg}
                   />
-                  <button type='submit'>Submit</button>
+                  <button
+                    type='submit'
+                    className={loading ? `loading` : undefined}>
+                    {loading ? `Sending` : `Submit`}
+                  </button>
                 </form>
               </footer>
             </div>

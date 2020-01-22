@@ -53,8 +53,8 @@ var Msg = mongoose.model('Msg', MsgSchema);
 
 app.get('/', urlencodedParser, (req, res) => {
   console.log('This is a get request bro');
-  res.send('🍒 Sorry, this is just an API.');
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  // res.send('🍒 Sorry, this is just an API.');
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
 // POST REQUEST

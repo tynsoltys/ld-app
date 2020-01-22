@@ -1,0 +1,54 @@
+@mixin hot-button {
+  border-color: $hot;
+  background-color: $hot;
+  color: white;
+}
+
+form {
+  transition: all 0.3s;
+  &:hover {
+    input {
+      border-color: $hot;
+    }
+    button {
+      @include hot-button;
+    }
+  }
+}
+
+input {
+  padding: 8px 10px;
+  border: 1px solid $gray-35;
+  width: calc(100% - 60px);
+  border-radius: 3px;
+  background-color: #fff;
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    box-shadow: 0 0 0 30px $hot-light inset !important;
+  }
+  &:focus,
+  &:active {
+    padding: 7px 9px;
+    outline: none;
+    border: 2px solid $hot;
+    background-color: rgba($hot, 0.05);
+  }
+}
+button {
+  padding: 7px 10px;
+  font-weight: bold;
+  color: $accent-dark;
+  border-radius: 2px;
+  margin-left: -22px;
+  border: 2px solid $gray-40;
+  &:focus {
+    outline: none;
+  }
+  &.loading {
+    @include hot-button;
+    border: none;
+    height: 31px;
+  }
+}

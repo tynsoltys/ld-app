@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
-import MessageContext from './contexts/MessageContext';
 import './App.scss';
+
+// Components
 import Header from './components/Header';
 import Main from './components/Main';
 // import Footer from './components/Footer';
 import Nav from './components/Nav';
 import ArticlesListing from './components/ArticlesListing';
 import Content from './components/Content';
+
+// State, etc.
+import MessageContext from './contexts/MessageContext';
+
+//APIs, Tools, Requests
 import { workspaceGenerator } from './utils/utils';
 const axios = require('axios');
 
@@ -59,11 +65,9 @@ class App extends Component {
         })
       )
       .then((res) => {
-        //TODO: create new route/view for msgs
-        console.log(res.data);
         this.setState({
           msg: '',
-          latest: res.data[0],
+          latest: res.data.msg,
           notificationShow: true,
           loading: false
         });
@@ -76,7 +80,6 @@ class App extends Component {
         this.setState({
           loading: false
         });
-        //TODO refactor notification to handle errors as well
       });
   }
 

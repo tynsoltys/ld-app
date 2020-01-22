@@ -1,53 +1,51 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var cors = require('cors');
-var bodyParser = require('body-parser');
-var indexRouter = require('./routes/index');
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
-
-require('dotenv').config();
+const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const cors = require('cors');
 
 var app = express();
+//set up template engine
+app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
-app.use(express.json());
+//static files
+app.use(express.static('./public'));
 app.use(cors());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+const urlencodedParser = bodyParser.urlencoded({ extended: true });
 
-// HANDLERS
-app.get('/', function(req, res, next) {
-  //TODO: Get any existing messages from DB and send to index
-  res.send('getting');
+// listen to a port
+app.listen('9000');
+console.log(`🎸  You're listening to port 9000`);
+
+//Connect to the database
+mongoose
+  .connect(
+    `mongodb+srv://` +
+      process.env.DB_USER +
+      `:` +
+      process.env.DB_PASS +
+      `@` +
+      process.env.DB_HOST +
+      `/test?retryWrites=true&w=majority`,
+    { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
+  )
+  .catch((error) => handleError(error));
+
+// Create a schema (the blueprint of data)
+const MsgSchema = new mongoose.Schema({
+  msg: String
 });
 
-let msgs = [];
+var Msg = mongoose.model('Msg', MsgSchema);
 
+console.log(`👋  Hey there! The app is running 🏃‍♀️`);
+
+// REQUEST HANDLERS
 app.post('/', urlencodedParser, (req, res) => {
-  msgs.push(req.body);
-  console.log('💌  Posting Message: ' + req.body.msg);
-  console.log(req.body);
-  res.send([req.body.msg, msgs]);
+  var newMsg = Msg(req.body).save((err, data) => {
+    console.log(req.body);
+    if (err) throw err;
+    console.log(data);
+    res.send(data);
+  });
 });
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.send(res.locals.message);
-});
-
-module.exports = app;

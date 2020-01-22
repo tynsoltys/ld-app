@@ -62,7 +62,8 @@ class App extends Component {
         },
         this.setState({
           loading: true
-        })
+        }),
+        console.log(`Sending ` + this.state.msg)
       )
       .then((res) => {
         this.setState({

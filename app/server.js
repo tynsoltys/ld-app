@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path');
 const cors = require('cors');
 require('dotenv').config();
 
@@ -14,6 +15,7 @@ var app = express();
 app.use(cors());
 app.use(bodyParser.json());
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
+app.use(express.static(path.join(__dirname, 'build')));
 
 // LISTEN
 app.listen('9000');
@@ -52,6 +54,7 @@ var Msg = mongoose.model('Msg', MsgSchema);
 app.get('/', urlencodedParser, (req, res) => {
   console.log('This is a get request bro');
   res.send('🍒 Sorry, this is just an API.');
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // POST REQUEST

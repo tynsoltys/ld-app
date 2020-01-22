@@ -4,9 +4,13 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
+// HELLO
+console.log(`👋  Hey there! The app is running 🏃‍♀️`);
+
+// RUN THIS
 var app = express();
 
-//static files
+// STUFF THAT'S NEEDED
 app.use(cors());
 app.use(bodyParser.json());
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
@@ -38,15 +42,29 @@ const MsgSchema = new mongoose.Schema({
   msg: String
 });
 
+// MODEL
 var Msg = mongoose.model('Msg', MsgSchema);
 
-console.log(`👋  Hey there! The app is running 🏃‍♀️`);
+// ROUTES AND REQUEST HANDLERS
 
-// POST REQUEST HANDLER
+// GET REQUEST
+
+app.get('/', urlencodedParser, (req, res) => {
+  console.log('This is a get request bro');
+  res.send('🍒 Sorry, this is just an API.');
+});
+
+// POST REQUEST
 app.post('/', urlencodedParser, (req, res) => {
   var newMsg = Msg(req.body).save((err, data) => {
     console.log(`💌  Posting: ${req.body.msg}`);
-    if (err) throw err;
+    err
+      ? () => {
+          console.log(`🙅  Uhoh!`);
+          throw err;
+        }
+      : console.log(`🎉  Success`);
+    //TODO improve error handling (and like add some logs maybe 🧠)
     res.json(data);
   });
 });

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import 'typeface-source-sans-pro';
 import './App.scss';
 
 // Components

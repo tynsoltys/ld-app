@@ -1,5 +1,5 @@
 body {
-  padding-top: 60px;
+  padding-top: var(--header-height);
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -19,24 +19,24 @@ ul {
 
 .header-container {
   width: 100%;
-  height: 60px;
+  height: var(--header-height);
   position: fixed;
   z-index: 10000;
   top: 0;
 }
 
 .main-container {
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - var(--header-height));
 }
 
 .nav-container {
-  flex: 1 0 60px;
-  width: 60px;
+  flex: 1 0 var(--header-height);
+  width: var(--header-height);
 }
 
 .articles-list-container {
   padding: 0;
-  width: 25%;
+  width: var(--article-list-width);
   flex: 1 0 auto;
 }
 

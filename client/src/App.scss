@@ -2,15 +2,17 @@
   box-sizing: border-box;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+
 @import './styles/variables';
 @import './styles/layout';
 @import './styles/typography';
 @import './styles/forms';
 
 // All sections correspond to components (list items contained in list stylesheets) and include internal layouts
-@import './styles/sections/header';
-@import './styles/sections/nav';
-@import './styles/sections/articles-list';
-@import './styles/sections/main';
-@import './styles/sections/content';
-@import './styles/sections/footer';
+@import './styles/components/header';
+@import './styles/components/nav';
+@import './styles/components/articles-list';
+@import './styles/components/main';
+@import './styles/components/content';
+@import './styles/components/footer';

@@ -1,7 +1,11 @@
 body {
-  font-size: 14px;
-  font-family: $font-stack;
+  font-size: var(--font-size);
+  font-family: var(--font-stack);
+  color: var(--font-color);
 }
+
+// Note: with the exception of lineheight and border-bottom,
+// all layout re: type is handled in component-specific files
 
 p,
 h1,
@@ -22,19 +26,19 @@ p {
 
 h1 {
   font-weight: 200;
-  font-size: 1.5em;
+  font-size: 2.1em;
   margin-bottom: 0;
 }
 
 h2 {
-  font-size: 1.35em;
-  margin-bottom: 0.5em;
+  font-size: 1.5em;
+  margin-bottom: 0.4em;
 }
 
 h3 {
   font-weight: 400;
   font-style: italic;
-  font-size: 1.05em;
+  font-size: 1.2em;
   margin-bottom: 20px;
 }
 

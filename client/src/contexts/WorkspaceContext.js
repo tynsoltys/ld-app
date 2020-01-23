@@ -8,6 +8,7 @@ class WorkspaceContextProvider extends Component {
     super(props);
     this.state = {
       msg: '',
+      msgStatus: '',
       latest: '',
       loading: false,
       notificationShow: false

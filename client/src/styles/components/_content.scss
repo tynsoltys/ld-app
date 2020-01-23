@@ -1,15 +1,16 @@
 .content-container {
-  padding: 1.5rem;
-  background: $content-bg;
+  padding: calc(2.9 * var(--sp));
+  padding-top: calc(2.5 * var(--sp);
+  background: var(--main-bg);
   .article-image {
     padding-top: 30px;
     text-align: center;
     .image {
       display: inline-block;
       width: 100%;
-      max-width: 500px;
+      max-width: 570px;
       height: 200px;
-      background: $accent-mid;
+      background: var(--grey-60);
     }
   }
   figcaption {

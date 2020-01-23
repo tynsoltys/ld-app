@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
-const port = process.env.PORT || 9000;
 require('dotenv').config();
 
 // HELLO
@@ -26,7 +25,7 @@ app.get('*', (req, res) => {
 });
 
 // LISTEN
-app.listen(port, (req, res) => {
+app.listen(process.env.PORT || 9000, (req, res) => {
   console.log(`🎸  You're listening to port 9000`);
 });
 

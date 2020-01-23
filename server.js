@@ -31,13 +31,7 @@ app.listen(process.env.PORT || 9000, (req, res) => {
 
 // CONNECT DB
 
-mongoose
-  .connect(process.env.MONGODB_URI, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useCreateIndex: true
-  })
-  .catch((error) => handleError(error));
+mongoose.connect(process.env.MONGODB_URI).catch((error) => handleError(error));
 
 // SCHEMA
 const MsgSchema = new mongoose.Schema({

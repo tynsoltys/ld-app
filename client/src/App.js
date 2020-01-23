@@ -37,7 +37,6 @@ class App extends Component {
       <div className='app-container'>
         <WorkspaceContextProvider>
           <Header />
-          <h1>HI IS THIS EVEN UPDATING</h1>
           <Main>
             <Nav items={navItems} />
             <ArticlesListing />

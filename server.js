@@ -12,7 +12,7 @@ console.log(`👋  Hey there! The server is running 🏃‍♀️`);
 var app = express();
 
 // STUFF THAT'S NEEDED
-app.use(cors());
+// app.use(cors());
 app.use(bodyParser.json());
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 
@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 const PORT = process.env.PORT || 9000; //Heroku sets port dynamically
 app
   .listen(PORT, () => {
-    console.log(`🎸  You're listening!`);
+    console.log(`🎸  You're listening to ${PORT}!`);
   })
   .on('error', (err) => {
     console.log(`Listening Error Code: ${err.code}`);

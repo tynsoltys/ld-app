@@ -4,10 +4,15 @@
 
 🚂 visit the app here.
 
-### 🏃‍♀️ How to run the app locally:
+### 🏃‍♀️ How to run the app locally/dev environment:
 
 1. Download or clone the ld-app to your local environment.
-2. Open a terminal in the `ld-app/app` directory and run `npm start`
+2. Open a terminal in the `ld-app/` directory, where you can use any of these commands:
+   - `npm run client-install` will install all the dependencies for the React app
+   - `npm start` will start the server and not reload after detecting any change
+   - `npm run server` will start the server, listen for any changes in the code, and hot reload the page on browser to reflect the change.
+   - `npm run client` will run the React app without starting the server.
+   - `npm run dev` will concurrently run the server and then run the client on your browser and hot reload _all the things_.
 
 ### 🎉 Highlights to check out:
 

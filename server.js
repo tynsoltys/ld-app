@@ -3,10 +3,11 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
+const port = process.env.PORT || 9000;
 require('dotenv').config();
 
 // HELLO
-console.log(`👋  Hey there! The app is running 🏃‍♀️`);
+console.log(`👋  Hey there! The server is running 🏃‍♀️`);
 
 // RUN THIS
 var app = express();
@@ -15,11 +16,19 @@ var app = express();
 app.use(cors());
 app.use(bodyParser.json());
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
+
+// production mode
 app.use(express.static(path.join(__dirname, 'client/build')));
 
+// build mode
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/public/index.html'));
+});
+
 // LISTEN
-app.listen('9000');
-console.log(`🎸  You're listening to port 9000`);
+app.listen(port, (req, res) => {
+  console.log(`🎸  You're listening to port 9000`);
+});
 
 // CONNECT DB
 const dbString =

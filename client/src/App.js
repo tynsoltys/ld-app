@@ -26,7 +26,7 @@ class App extends Component {
 
   // Checking to see if we're up and running
   componentDidMount() {
-    console.log(`🏇 App is running`);
+    console.log(`🏇React app is running!`);
     const navItems = workspaceGenerator(4);
     this.setState({ navItems });
   }

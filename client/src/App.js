@@ -39,7 +39,6 @@ class App extends Component {
           <Header />
           <Main>
             <Nav items={navItems} />
-            <h1>CHCKING BUILD</h1>
             <ArticlesListing />
             <div className='content-container'>
               <Content />

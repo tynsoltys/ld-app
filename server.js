@@ -6,35 +6,18 @@ const cors = require('cors');
 require('dotenv').config();
 
 // HELLO
-console.log(`👋  Hey there! The server is running 🏃‍♀️`);
+console.log(`👋  Hey there! The app is running 🏃‍♀️`);
 
 // RUN THIS
 var app = express();
 
 // STUFF THAT'S NEEDED
-// app.use(cors());
+app.use(cors());
 app.use(bodyParser.json());
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
-
-// production mode
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-// //Non api requests in production
-// if (
-//   process.env.NODE_ENV === 'production' ||
-//   process.env.NODE_ENV === 'staging'
-// ) {
-//   // Add production middleware such as redirecting to https
-
-//   // Express will serve up production assets i.e. main.js
-//   app.use(express.static(path.join(__dirname, 'client/build')));
-//   // If Express doesn't recognize route serve index.html
-//   const path = require('path');
-//   app.get('*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-//   });
-// }
-
+// LISTEN
 const PORT = process.env.PORT || 9000; //Heroku sets port dynamically
 app
   .listen(PORT, () => {
@@ -45,9 +28,10 @@ app
   });
 
 // CONNECT DB
+const dbString = process.env.MONGODB_URI;
 
 mongoose
-  .connect(process.env.MONGODB_URI, {
+  .connect(dbString, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true
@@ -67,9 +51,15 @@ var Msg = mongoose.model('Msg', MsgSchema);
 // GET REQUEST
 
 app.get('/', urlencodedParser, (req, res) => {
-  console.log('This is a get request bro');
+  // console.log('This is a get request bro');
   // res.send('🍒 Sorry, this is just an API.');
-  res.sendFile(path.join('index.html'));
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
+});
+
+app.get('*', urlencodedParser, (req, res) => {
+  // console.log('This is a get request bro');
+  // res.send('🍒 Sorry, this is just an API.');
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
 // POST REQUEST

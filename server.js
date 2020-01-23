@@ -15,7 +15,7 @@ var app = express();
 app.use(cors());
 app.use(bodyParser.json());
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 // LISTEN
 app.listen('9000');
@@ -54,7 +54,7 @@ var Msg = mongoose.model('Msg', MsgSchema);
 app.get('/', urlencodedParser, (req, res) => {
   console.log('This is a get request bro');
   // res.send('🍒 Sorry, this is just an API.');
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  res.sendFile(path.join('index.html'));
 });
 
 // POST REQUEST

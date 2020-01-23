@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
-const proxy = require('http-proxy-middleware');
 require('dotenv').config();
 
 // HELLO
@@ -14,7 +13,6 @@ var app = express();
 
 // STUFF THAT'S NEEDED
 app.use(cors());
-app.use(proxy(['http://localhost:9000'], { target: '/' }));
 app.use(bodyParser.json());
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 

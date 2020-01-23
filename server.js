@@ -31,17 +31,9 @@ app.listen(port, (req, res) => {
 });
 
 // CONNECT DB
-const dbString =
-  `mongodb+srv://` +
-  process.env.DB_USER +
-  `:` +
-  process.env.DB_PASS +
-  `@` +
-  process.env.DB_HOST +
-  `?retryWrites=true&w=majority`;
 
 mongoose
-  .connect(dbString, {
+  .connect(process.env.MONGODB_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true

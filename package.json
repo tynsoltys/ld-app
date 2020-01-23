@@ -14,7 +14,6 @@
   },
   "scripts": {
     "start": "node server.js",
-    "deploy": "(cd client && npm run-script build) & node server.js",
     "client-install": "npm install --prefix client",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",

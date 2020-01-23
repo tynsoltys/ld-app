@@ -29,7 +29,7 @@ class WorkspaceContextProvider extends Component {
     // POST request
     axios
       .post(
-        '',
+        '/',
         {
           msg: this.state.msg
         },

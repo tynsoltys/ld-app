@@ -6,6 +6,7 @@
     padding: var(--sp);
     padding-bottom: 7px;
     position: relative;
+    transition: var(--transition-fast);
     h2 {
       margin-bottom: 5px;
       font-size: 1em;
@@ -17,6 +18,21 @@
       -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
       overflow: hidden;
+    }
+    &:hover:after {
+      content: ' ';
+      background: var(--main-bg);
+      --side: 12px;
+      width: var(--side);
+      height: var(--side);
+      border: var(--border);
+      border-top: none;
+      border-right: none;
+      position: absolute;
+      // vertical math is 1/2 the hypotenuse but let's guess
+      bottom: calc(50% - (var(--side) / 2 - 1px));
+      right: calc(var(--side) / -2 - 1px);
+      transform: rotate(45deg);
     }
     &.activeArticle {
       &:after {
@@ -34,6 +50,10 @@
         right: calc(var(--side) / -2 - 1px);
         transform: rotate(45deg);
       }
+    }
+    &:hover {
+      background: var(--grey-10);
+      padding-left: 15px;
     }
   }
 }

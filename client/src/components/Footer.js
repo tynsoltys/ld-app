@@ -37,10 +37,12 @@ class Footer extends Component {
                   name='msg'
                   onChange={handleInputChange}
                   value={msg}
-                />
+                  className={
+                    loading || msg.length > 0 ? `hasUnsentContent` : undefined
+                  }></input>
                 <button
                   type='submit'
-                  className={loading ? `loading` : undefined}>
+                  className={loading || msg.length > 0 ? `loading` : undefined}>
                   {loading ? `Sending` : `Submit`}
                 </button>
               </form>

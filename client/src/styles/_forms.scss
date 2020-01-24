@@ -26,7 +26,7 @@ input {
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
-    box-shadow: 0 0 0 30px var(--grey-40) inset !important;
+    box-shadow: 0 0 0 30px var(--grey-00) inset !important;
   }
   &:focus,
   &:active {
@@ -34,6 +34,9 @@ input {
     outline: none;
     border: 2px solid var(--accent);
     background-color: rgba(var(--accent), 0.05);
+  }
+  &.hasUnsentContent {
+    border-color: var(--accent);
   }
 }
 button {

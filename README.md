@@ -1,4 +1,4 @@
-# ld-app
+# ld-app with mongoDB database
 
 ---
 
@@ -6,16 +6,20 @@
 
 The app is hosted [here](https://boiling-river-63434.herokuapp.com/). I've included some additional notes on features and assumptions below.
 
+This setup requires a mongoDB database to be set up.
+
 ---
 
 #### 🏃‍♀️ How to run the app locally/dev environment:
 
 1. Download or clone the ld-app to your local environment.
 2. Open a terminal and navigate to the `/ld-app` directory.
-3. Run `npm install` to install all server dependencies.
-4. Run `npm run client-install` will install all React app dependencies
-5. Run `npm run dev` to start concurrent run of server & client
-6. Go to `http://localhost:3000`.
+3. Create a basic mongodb database at [mongoDB Atlas](https://cloud.mongodb.com/).
+4. Create a `.env` file in the `/ld-app` directory and set a `MONGODB_URI=<yourconnectionstring>` without any of the extra params.
+5. Run `npm install` to install all server dependencies.
+6. Run `npm run client-install` will install all React app dependencies
+7. Run `npm run dev` to start concurrent run of server & client
+8. Go to `http://localhost:3000`.
 
 ---
 
@@ -37,7 +41,7 @@ The app is hosted [here](https://boiling-river-63434.herokuapp.com/). I've inclu
 
 #### Things to check out:
 
-1. 💌 First, send me a message.. the expected behaviour is to receive a pop-up note with your message. _👉 Note that these are going to a DB and I am going to read them so be nice, but do feel free to provide live feedback! ❤️_
+1. 💌 First, send me a message.. the expected behaviour is to receive a pop-up note with your message. 👉 _These will get stored in your DB_
 2. 🖱 Added a couple of lil microinteractions (I know I wasn't supposed to do this but this girl's gotta have fun 🎉).
 3. 🎨 Check out the CSS used to recolour the logdna logo to match the mockup (now I'm just flexing 💪).
 

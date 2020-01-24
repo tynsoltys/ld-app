@@ -1,11 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
 var logger = require('morgan');
-var createError = require('http-errors');
-require('dotenv').config();
 
 // HELLO
 console.log(`👋  Hey there! The app is running 🏃‍♀️`);
@@ -31,43 +28,15 @@ app
     console.log(`Listening Error Code: ${err.code}`);
   });
 
-// CONNECT DB
-const dbString = process.env.MONGODB_URI;
-
-mongoose
-  .connect(dbString, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    connectTimeoutMS: 1000
-  })
-  .catch((err) => {
-    console.log(`DB error: ${err}`);
-  });
-
-// SCHEMA
-const MsgSchema = new mongoose.Schema({
-  msg: String
-});
-
-// MODEL
-var Msg = mongoose.model('Msg', MsgSchema);
-
 // ROUTES AND REQUEST HANDLERS
 
 // GET REQUEST
 
 // POST REQUEST
 app.post('/', urlencodedParser, (req, res, next) => {
-  var newMsg = Msg(req.body).save((err, data) => {
-    console.log(`💌  Posting: ${req.body.msg}`);
-    err
-      ? () => {
-          next(err);
-        }
-      : console.log(`🎉  Success`);
-    res.json(data);
-  });
+  console.log(`💌  Posting: ${req.body.msg}`);
+  const reason = `You cannot send an empty message!`;
+  req.body.msg.length === 0 ? next() : res.json(req.body);
 });
 
 // ROUTES N THINGS

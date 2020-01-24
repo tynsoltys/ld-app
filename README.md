@@ -31,13 +31,13 @@ The app is hosted [here](https://boiling-river-63434.herokuapp.com/). I've inclu
 | `npm run dev`                   | concurrently run server and client and hot reload _all the things_ |
 | `npm run build --prefix client` | build React app in /client/build.                                  |
 
-###### _To preview the react build with the test server, build React app, start server, and go to localhost:9000_
+###### _To preview the react build locally with the test server, build React app, start server, and go to localhost:9000_
 
 ---
 
 #### Things to check out:
 
-1. 💌 First, send me a message.. the expected behaviour is to receive a pop-up note with your message. _👉 Note that these are going to a DB and I am going to read them so be nice, but do feel free to provide live feedback! ❤️_
+1. 💌 First, send yourself a lovely message.. the expected behaviour is to receive a pop-up note with your message or an error (try sending an empty string).
 2. 🖱 Added a couple of lil microinteractions (I know I wasn't supposed to do this but this girl's gotta have fun 🎉).
 3. 🎨 Check out the CSS used to recolour the logdna logo to match the mockup (now I'm just flexing 💪).
 

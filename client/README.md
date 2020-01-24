@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# NOTE THAT I USED NPM FOR THIS PROJECT
+
+## Default CRA readme below..
+
 ## Available Scripts
 
 In the project directory, you can run:

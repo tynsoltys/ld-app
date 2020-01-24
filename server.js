@@ -13,19 +13,13 @@ console.log(`👋  Hey there! The app is running 🏃‍♀️`);
 // RUN THIS
 var app = express();
 
-// STUFF THAT'S NEEDED
+// MIDDLEWARES AND OTHER FUN THINGS
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 app.use(express.static(path.join(__dirname, 'client/build')));
-
-// ERROR HANDLING
-
-app.use((err, req, res, next) => {
-  console.log(err);
-});
 
 // LISTEN
 const PORT = process.env.PORT || 9000; //Heroku sets port dynamically
@@ -44,9 +38,12 @@ mongoose
   .connect(dbString, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    connectTimeoutMS: 1000
   })
-  .catch((error) => handleError(error));
+  .catch((err) => {
+    console.log(`DB error: ${err}`);
+  });
 
 // SCHEMA
 const MsgSchema = new mongoose.Schema({
@@ -60,43 +57,32 @@ var Msg = mongoose.model('Msg', MsgSchema);
 
 // GET REQUEST
 
-app.get('/', urlencodedParser, (req, res, next) => {
-  next(createError('oof'));
-  res.sendFile(path.join(__dirname, 'client/build/index.html'));
-});
-
-app.get('*', urlencodedParser, (req, res, next) => {
-  next(createError('oof'));
-  res.sendFile(path.join(__dirname, 'client/build/index.html'));
-});
-
 // POST REQUEST
 app.post('/', urlencodedParser, (req, res, next) => {
   var newMsg = Msg(req.body).save((err, data) => {
     console.log(`💌  Posting: ${req.body.msg}`);
-    console.log(err);
     err
       ? () => {
-          throw err;
+          next(err);
         }
       : console.log(`🎉  Success`);
-    //TODO improve error handling (and like add some logs maybe 🧠)
     res.json(data);
   });
 });
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+// ROUTES N THINGS
+
+app.get('/', urlencodedParser, (req, res, next) => {
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.get('*', urlencodedParser, (req, res, next) => {
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
+});
 
-  // render the error page
-  res.status(err.status || 500);
-  res.send(err);
+// ERROR HANDLING
+
+app.use((err, req, res, next) => {
+  console.log(`There's some weird ${err.name} in the house.`);
+  res.status(err.statusCode || 500).send(err.message);
 });

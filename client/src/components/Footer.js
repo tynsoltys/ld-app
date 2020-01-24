@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { WorkspaceContext } from '../contexts/WorkspaceContext';
+import ReactHtmlParser from 'react-html-parser';
 
 class Footer extends Component {
   static contextType = WorkspaceContext;
+
   render() {
     return (
       <WorkspaceContext.Consumer>
@@ -10,31 +12,23 @@ class Footer extends Component {
           // Destructuring variables for component
           const {
             msg,
-            latest,
             notificationShow,
             handleInputChange,
             handleSubmit,
             loading,
-            closeNotification
+            closeNotification,
+            notificationString
           } = this.context;
           return (
             <footer className='message-container'>
               <div
-                onClick={closeNotification}
                 className={`notification ${
                   notificationShow ? `opening` : `closing`
                 }`}>
-                <p>
-                  <strong>
-                    <span role='img' aria-label='check'>
-                      ✔️
-                    </span>{' '}
-                    Successfully sent
-                  </strong>{' '}
-                  "{latest}".
-                  <strong></strong>
+                {ReactHtmlParser(notificationString)}
+                <p className='close' onClick={closeNotification}>
+                  ✕
                 </p>
-                <p className='close'>✕</p>
               </div>
               <form onSubmit={handleSubmit}>
                 <input

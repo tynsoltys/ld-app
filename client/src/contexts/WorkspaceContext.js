@@ -8,10 +8,9 @@ class WorkspaceContextProvider extends Component {
     super(props);
     this.state = {
       msg: '',
-      msgStatus: '',
-      latest: '',
       loading: false,
-      notificationShow: false
+      notificationShow: false,
+      notificationString: ''
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,20 +38,23 @@ class WorkspaceContextProvider extends Component {
         })
       )
       .then((res) => {
+        console.log(res);
+        const notificationString = `<p>&#127881; <strong>Successfully sent: </strong> ${res.data.msg}</p>`;
         this.setState({
           msg: '',
           latest: res.data.msg,
           notificationShow: true,
-          loading: false
+          loading: false,
+          notificationString
         });
       })
       .catch((error) => {
-        console.log('hi' + error);
-        alert(
-          `🙅 ${error} \nWe're sorry, your message could not be sent at this time.`
-        );
+        console.log('🙅 ' + error);
+        const notificationString = `<p>&#128584; <strong>Uhoh! Your message could not be sent.</strong> (${error})</p>`;
         this.setState({
-          loading: false
+          loading: false,
+          notificationString,
+          notificationShow: true
         });
       });
   }
@@ -68,7 +70,6 @@ class WorkspaceContextProvider extends Component {
       <WorkspaceContext.Provider
         value={{
           ...this.state,
-          toggleNotification: this.toggleNotification,
           handleInputChange: this.handleInputChange,
           handleSubmit: this.handleSubmit,
           closeNotification: this.closeNotification

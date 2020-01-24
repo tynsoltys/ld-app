@@ -31,7 +31,7 @@ class WorkspaceContextProvider extends Component {
       .post(
         '/',
         {
-          msg: this.state
+          msg: this.state.msg
         },
         this.setState({
           loading: true
